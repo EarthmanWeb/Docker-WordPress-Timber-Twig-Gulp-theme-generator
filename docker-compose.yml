@@ -1,0 +1,114 @@
+version: "3.3"
+services:
+  db:
+    image: mysql:5.7
+    networks:
+      - back
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: p4ssw0rd!
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: p4ssw0rd!
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress
+    ports:
+      - 8000:80
+    networks:
+      - front
+      - back
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_TABLE_PREFIX: "wp_"
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content:/var/www/html/wp-content
+      - ./build:/var/www/html/wp-content/themes/my-timber-theme
+    networks:
+      - front
+      - back
+
+  # node:
+  #   depends_on:
+  #     - db
+  #     - wordpress
+  #     - wordpress-cli
+  #   image: "node:14.12"
+  #   working_dir: /app
+  #   environment:
+  #     - NODE_ENV=development
+  #   volumes:
+  #     - ./app:/app
+  #     - ./app/node_modules:/app/node_modules
+  #     - ./build:/build
+  #     - ./dist:/dist
+  #   ports:
+  #     - 3000:3000
+  #     - 3001:3001
+  #   links:
+  #     - wordpress:wordpress
+  #   command: >
+  #     /bin/sh -c '
+  #     yarn global add gulp@4.0.2;
+  #     yarn;
+  #     gulp watch;
+  #     '
+  #   # restart: always
+  #   networks:
+  #     - front
+
+  wordpress-cli:
+    depends_on:
+      - db
+      - wordpress
+    image: wordpress:cli-1
+    # run wordpress-cli with the same user-id as wordpress.
+    # This way there are no permission problems with the cli
+    user: xfs
+    # The sleep 100 is required so that the command is run after
+    # mysql is initialized. Depending on your machine this might take
+    # longer or it can go faster.
+    command: >
+      /bin/sh -c '
+      sleep 60;
+      wp core install --path="/var/www/html" --url="http://localhost:8000" --title="Wordpress Timber Docker" --admin_user=admin --admin_password=p4ssw0rd!  --admin_email=admin@dockerhub.com;
+      wp plugin delete akismet hello;
+      wp theme delete twentynineteen twentyseventeen;
+      wp plugin install timber-library;
+      wp plugin activate timber-library;
+      wp plugin install advanced-custom-fields;
+      wp plugin activate advanced-custom-fields;
+      '
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content:/var/www/html/wp-content
+      - ./build:/var/www/html/wp-content/themes/my-timber-theme
+      - ./app/src/theme:/var/www/src/theme
+    networks:
+      - front
+      - back
+
+volumes:
+  wp_data:
+networks:
+  front:
+  back:

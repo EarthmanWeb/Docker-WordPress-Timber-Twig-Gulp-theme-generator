@@ -1,0 +1,6 @@
+.DS_Store
+app/node_modules/
+build/
+dist/
+mysql/
+wp-content/
