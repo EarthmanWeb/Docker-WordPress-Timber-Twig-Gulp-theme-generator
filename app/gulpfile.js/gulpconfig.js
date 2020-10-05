@@ -1,12 +1,12 @@
 // ==== CONFIGURATION ==== //
 
 // Project settings - change these in your new project
-const themeFolder = 'my-timber-theme'; // The directory name for your theme - no spaces, characters (other than _ or -) or capitals;
-const themeName = 'My Theme Name';
-const themeUri = 'https://github.com/timber/starter-theme';
-const themeAuthor = 'Theme Creator';
-const themeDescription = 'This is my new theme!';
-const themeVersion = '1.0.0';
+const themeFolder = 'sos-constructex'; // The directory name for your theme - no spaces, characters (other than _ or -) or capitals;
+const themeName = 'SOS Constructex Custom Theme';
+const themeUri = 'https://sosmediacorp.com';
+const themeAuthor = 'SOS Job Applicant';
+const themeDescription = 'This is the custom theme you requested, rolled out by a custom Docker / Gulp build automations that I created, too!!!';
+const themeVersion = '1.0.1';
 
 // Do not alter these
 const src = './src/'; // The raw material of your theme: custom scripts, SCSS source files, PHP files, images, etc.; do not delete this folder!
