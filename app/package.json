@@ -55,6 +55,7 @@
     ]
   },
   "dependencies": {
+    "gulp-composer": "^0.4.5",
     "gulp-print": "^5.0.2",
     "postcss-cssnext": "^3.1.0",
     "postcss-short": "^5.0.0"

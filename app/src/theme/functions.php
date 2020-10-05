@@ -8,6 +8,14 @@
  * @since   Timber 0.1
  */
 
+
+
+/* Include .inc files from includes folder. */
+foreach (glob(__DIR__ . '/includes/*.inc') as $filename)
+{
+	include_once $filename;
+}
+
 /**
  * If you are installing Timber as a Composer dependency in your theme, you'll need this block
  * to load your dependencies and initialize Timber. If you are using Timber via the WordPress.org

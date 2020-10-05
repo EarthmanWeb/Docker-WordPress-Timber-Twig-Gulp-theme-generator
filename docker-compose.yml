@@ -93,10 +93,6 @@ services:
       wp core install --path="/var/www/html" --url="http://localhost:8000" --title="Wordpress Timber Docker" --admin_user=admin --admin_password=p4ssw0rd!  --admin_email=admin@dockerhub.com;
       wp plugin delete akismet hello;
       wp theme delete twentynineteen twentyseventeen;
-      wp plugin install timber-library;
-      wp plugin activate timber-library;
-      wp plugin install advanced-custom-fields;
-      wp plugin activate advanced-custom-fields;
       '
     volumes:
       - wp_data:/var/www/html
