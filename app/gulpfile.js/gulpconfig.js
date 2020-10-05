@@ -1,10 +1,17 @@
 // ==== CONFIGURATION ==== //
 
-// Project paths
-const project = 'contructex-theme'; // The directory name for your theme; change this at the very least!
+// Project settings - change these in your new project
+const themeFolder = 'my-timber-theme'; // The directory name for your theme - no spaces, characters (other than _ or -) or capitals;
+const themeName = 'My Theme Name';
+const themeUri = 'https://github.com/timber/starter-theme';
+const themeAuthor = 'Theme Creator';
+const themeDescription = 'This is my new theme!';
+const themeVersion = '1.0.0';
+
+// Do not alter these
 const src = './src/'; // The raw material of your theme: custom scripts, SCSS source files, PHP files, images, etc.; do not delete this folder!
-const build = '../build/'; // A temporary directory containing a development version of your theme; delete it anytime
-const dist = '../dist/' + project + '/'; // The distribution package that you'll be uploading to your server; delete it anytime
+const build = '../build/' + themeFolder + '/'; // A temporary directory containing a development version of your theme; delete it anytime
+const dist = '../dist/' + themeFolder + '/'; // The distribution package that you'll be uploading to your server; delete it anytime
 const assets = './assets/'; // A staging area for assets that require processing before landing in the source folder (example: icons before being added to a sprite sheet)
 const modules = './node_modules/'; // npm packages
 
@@ -61,6 +68,13 @@ module.exports = {
   },
 
   styles: {
+    vars: {
+      'themeName': themeName,
+      'themeUri': themeUri,
+      'themeAuthor': themeAuthor,
+      'themeDescription': themeDescription,
+      'themeVersion': themeVersion
+    },
     build: {
       src: src + 'scss/**/*.scss',
       dest: build,
