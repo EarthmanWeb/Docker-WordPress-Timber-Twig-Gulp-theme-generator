@@ -1,7 +1,6 @@
 <?php
 /**
- * Timber starter-theme
- * https://github.com/timber/starter-theme
+ * Contructex Theme
  *
  * @package  WordPress
  * @subpackage  Timber
