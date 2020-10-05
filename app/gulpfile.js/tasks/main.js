@@ -6,28 +6,25 @@ const composer = require('gulp-composer');
 
 // Install Composer deps
 function themeComposerInstall(done){
-  return gulp.series(
-    function () {
-      composer({
-          "working-dir": "./src/theme",
-          bin: "composer"
-      })
-    }
-  )(done)
+  return gulp.series(function(){
+    return composer({
+      "working-dir": "./src/theme",
+      bin: "composer"
+    })
+  })(done)
 }
 
 // One-off setup tasks
 function setup(done) { gulp.series('utilsNormalize')(done) }
 
-
 // Build a working copy of the theme
-function build(done) {
-  return gulp.parallel(themeComposerInstall, 'images', 'scripts', 'styles', 'theme')(done);
+function build(done){
+  return gulp.series(themeComposerInstall, gulp.parallel('images', 'scripts', 'styles', 'theme'))(done);
 }
 
 // Dist task chain: wipe -> build -> clean -> copy -> compress images
 // NOTE: this is a resource-intensive task!
-function dist(done) { gulp.series('imagesOptimize')(done)}
+function dist(done){ gulp.series(themeComposerInstall, 'imagesOptimize')(done)}
 
 // export tasks
 exports.setup = setup;
