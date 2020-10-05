@@ -42,7 +42,7 @@ services:
     volumes:
       - wp_data:/var/www/html
       - ./wp-content:/var/www/html/wp-content
-      - ./build:/var/www/html/wp-content/themes/my-timber-theme
+      - ./build:/var/www/html/wp-content/themes
     networks:
       - front
       - back
@@ -97,7 +97,7 @@ services:
     volumes:
       - wp_data:/var/www/html
       - ./wp-content:/var/www/html/wp-content
-      - ./build:/var/www/html/wp-content/themes/my-timber-theme
+      - ./build:/var/www/html/wp-content/themes
       - ./app/src/theme:/var/www/src/theme
     networks:
       - front

@@ -8,12 +8,17 @@ const postcss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer');
 const cssnext = require('postcss-cssnext');
 const shortcss = require('postcss-short');
-
+const replace = require('gulp-replace');
 
 // Build stylesheets from source Sass files, autoprefix, and write source maps (for debugging) with libsass
 function styleslibsass() {
   return gulp
     .src(config.styles.build.src)
+    .pipe(replace('themeName', config.styles.vars.themeName))
+    .pipe(replace('themeUri', config.styles.vars.themeUri))
+    .pipe(replace('themeAuthor', config.styles.vars.themeAuthor))
+    .pipe(replace('themeDescription', config.styles.vars.themeDescription))
+    .pipe(replace('themeVersion', config.styles.vars.themeVersion))
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass(config.styles.libsass))
     .pipe(postcss([
