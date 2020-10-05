@@ -41,7 +41,6 @@ services:
       WORDPRESS_DEBUG: 1
     volumes:
       - wp_data:/var/www/html
-      - ./wp-content:/var/www/html/wp-content
       - ./build:/var/www/html/wp-content/themes
     networks:
       - front
@@ -54,27 +53,19 @@ services:
   #     - wordpress-cli
   #   image: "node:14.12"
   #   working_dir: /app
-  #   environment:
-  #     - NODE_ENV=development
   #   volumes:
   #     - ./app:/app
   #     - ./app/node_modules:/app/node_modules
   #     - ./build:/build
-  #     - ./dist:/dist
   #   ports:
   #     - 3000:3000
   #     - 3001:3001
-  #   links:
-  #     - wordpress:wordpress
   #   command: >
   #     /bin/sh -c '
   #     yarn global add gulp@4.0.2;
   #     yarn;
-  #     gulp watch;
+  #     gulp build;
   #     '
-  #   # restart: always
-  #   networks:
-  #     - front
 
   wordpress-cli:
     depends_on:
@@ -96,7 +87,6 @@ services:
       '
     volumes:
       - wp_data:/var/www/html
-      - ./wp-content:/var/www/html/wp-content
       - ./build:/var/www/html/wp-content/themes
       - ./app/src/theme:/var/www/src/theme
     networks:
