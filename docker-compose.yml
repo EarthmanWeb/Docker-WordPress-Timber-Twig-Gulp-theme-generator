@@ -42,9 +42,6 @@ services:
     volumes:
       - wp_data:/var/www/html
       - ./build:/var/www/html/wp-content/themes
-    networks:
-      - front
-      - back
 
   # node:
   #   depends_on:

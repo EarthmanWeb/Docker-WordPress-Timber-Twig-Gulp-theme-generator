@@ -146,7 +146,7 @@ module.exports = {
       styles: src + 'scss/**/*.scss',
       scripts: src + 'js/**/*.js',
       images: src + '**/*(*.png|*.jpg|*.jpeg|*.gif|*.svg)',
-      theme: [src + 'templates/**/*.twig', src + 'theme/**/*.php'],
+      theme: [src + 'theme/templates/**/*.twig', src + 'theme/**/*.php'],
       livereload: build + '**/*',
       fonts: src + '**/*(*.eot|*.svg|*.ttf|*.woff)',
     },

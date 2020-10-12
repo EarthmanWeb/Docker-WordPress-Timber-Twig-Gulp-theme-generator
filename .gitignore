@@ -4,3 +4,4 @@ build/
 dist/
 mysql/
 wp-content/
+node_modules

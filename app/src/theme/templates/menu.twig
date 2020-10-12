@@ -1,10 +1,16 @@
 {% if menu %}
-	<ul>
-	{% for item in items %}
-		<li class="{{ item.classes | join(' ') }}">
-			<a target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
-			{% include "menu.twig" with {'items': item.children} %}
-		</li>
-	{% endfor %}
-	</ul>
+  	<nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
+    <div class="container">	  	<div id="{{theme.slug}}-navbar-collapse-1" class="collapse navbar-collapse">
+		{% for item in items %}
+			<ul class="{{ item.classes|join('nav', 'navbar-nav') }}">
+				<a target="{{ item.target }}" href="{{ item.link }}">
+				{{ item.title }}
+				</a>
+				{% include 'menu.twig' with {
+				items: item.children
+				} %}
+			</ul>
+		{% endfor %}
+		</div>
+  	</nav>
 {% endif %}
