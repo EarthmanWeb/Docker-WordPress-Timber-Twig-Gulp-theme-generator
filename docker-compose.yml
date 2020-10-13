@@ -21,6 +21,8 @@ services:
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: p4ssw0rd!
+    networks:
+      - back
 
   wordpress:
     depends_on:
@@ -72,15 +74,33 @@ services:
     # run wordpress-cli with the same user-id as wordpress.
     # This way there are no permission problems with the cli
     user: xfs
-    # The sleep 100 is required so that the command is run after
+    # The sleep 60 is required so that the CLI commands are run after
     # mysql is initialized. Depending on your machine this might take
     # longer or it can go faster.
     command: >
       /bin/sh -c '
-      sleep 60;
+      wp option get page_on_front > /dev/null;
+      if [ $$? -gt 0 ]; then
+        echo "Waiting for MySQL...";
+        sleep 60;
+      fi;
       wp core install --path="/var/www/html" --url="http://localhost:8000" --title="Wordpress Timber Docker" --admin_user=admin --admin_password=p4ssw0rd!  --admin_email=admin@dockerhub.com;
-      wp plugin delete akismet hello;
-      wp theme delete twentynineteen twentyseventeen;
+      DATA_EXISTS=$$(wp option get page_on_front);
+      if [ $$DATA_EXISTS = 0 ];
+      then
+        echo "WordPress not setup yet - Setting up title and admin user...";
+        echo "Removing default data...";
+        wp plugin delete akismet hello;
+        wp theme delete twentynineteen twentyseventeen;
+        wp site empty --yes;
+        echo "Importing data...";
+        wp plugin install wordpress-importer --activate;
+        wp import /var/www/src/theme/data/wordpress-base-data.xml --authors=create;
+        wp option update show_on_front "page";
+        wp option update page_on_front 5;
+      fi;
+      echo "SUCCESS: WP-CLI setup commands completed.";
+      tail -F persistCliContainer 2> /dev/null;
       '
     volumes:
       - wp_data:/var/www/html
