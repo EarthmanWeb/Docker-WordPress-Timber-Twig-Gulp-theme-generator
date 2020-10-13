@@ -33,11 +33,11 @@ module.exports = {
     build: {
       // Copies images from `src` to `build`; does not optimize
       src: src + '**/*(*.png|*.jpg|*.jpeg|*.gif|*.svg)',
-      dest: build + 'images/',
+      dest: build + '/',
     },
     dist: {
       src: [
-        dist + '**/*(*.png|*.jpg|*.jpeg|*.gif|*.svg)',
+        dist + '**/*(*.png|*.jpg|*.jpeg|*.gif)',
         '!' + dist + 'screenshot.png',
       ], // The source is actually `dist` since we are minifying images in place
       imagemin: {

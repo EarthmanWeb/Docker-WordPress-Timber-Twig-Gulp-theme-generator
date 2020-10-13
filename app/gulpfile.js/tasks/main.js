@@ -30,7 +30,7 @@ function build(done) {
 // Dist task chain: wipe -> build -> clean -> copy -> compress images
 // NOTE: this is a resource-intensive task!
 function dist(done) {
-  gulp.series(themeComposerInstall, 'imagesOptimize')(done);
+  gulp.series('imagesOptimize')(done);
 }
 
 // export tasks

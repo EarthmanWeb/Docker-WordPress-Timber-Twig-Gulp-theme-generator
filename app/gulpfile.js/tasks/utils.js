@@ -17,7 +17,7 @@ function utilsNormalize() {
 
 // Totally wipe the contents of the `dist` folder to prepare for a clean build; additionally trigger Bower-related tasks to ensure we have the latest source files
 function delWipe() {
-  return del(config.utils.wipe);
+  return del(config.utils.wipe, { force: true });
 }
 function utilsWipe(done) {
   return gulp.series('setup', delWipe)(done);
