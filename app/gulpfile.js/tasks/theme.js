@@ -1,5 +1,5 @@
 // ==== THEME ==== //
-"use strict";
+'use strict';
 
 const config = require('../gulpconfig.js');
 const gulp = require('gulp');
@@ -23,7 +23,7 @@ function themeTwig() {
 }
 
 // Copy fonts to the build/views folder
-function themeFonts(){
+function themeFonts() {
   return gulp
     .src(config.theme.fonts.src)
     .pipe(plugins.changed(config.theme.fonts.dest))
@@ -31,12 +31,9 @@ function themeFonts(){
 }
 
 // All the theme tasks in one
-function theme(done){
-  return gulp.series(
-    gulp.parallel(themePhp, themeTwig, themeFonts)
-  )(done)
+function theme(done) {
+  return gulp.series(gulp.parallel(themePhp, themeTwig, themeFonts))(done);
 }
-
 
 // export task
 exports.theme = theme;

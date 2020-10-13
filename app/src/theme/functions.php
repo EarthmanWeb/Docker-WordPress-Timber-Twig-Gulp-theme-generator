@@ -8,18 +8,41 @@
  * @since   Timber 0.1
  */
 
+
+/* Disable page template cache for dev environment  -  remove for production install */
+function wp_fix_template_caching(WP_Screen $current_screen)
+{
+
+	// Only flush the file cache with each request to post list table, edit post screen, or theme editor.
+	if (!in_array($current_screen->base, array('post', 'edit', 'theme-editor'), true)) {
+		return;
+	}
+
+	$theme = wp_get_theme();
+	if (!$theme) {
+		return;
+	}
+
+	$cache_hash = md5($theme->get_theme_root() . '/' . $theme->get_stylesheet());
+	$label = sanitize_key('files_' . $cache_hash . '-' . $theme->get('Version'));
+	$transient_key = substr($label, 0, 29) . md5($label);
+	delete_transient($transient_key);
+}
+add_action('current_screen', 'wp_fix_template_caching');
+
 /**
  * Register Custom Navigation Walker to convert WP menus to Bootstrap4
  */
-function register_navwalker(){
+function register_navwalker()
+{
 	require_once get_template_directory() . '/vendor/wp-bootstrap/wp-bootstrap-navwalker/class-wp-bootstrap-navwalker.php';
 }
-add_action( 'after_setup_theme', 'register_navwalker' );
+add_action('after_setup_theme', 'register_navwalker');
 
 /**
  * Enqueue Bootstrap4 styles
  */
-function mytimbertheme_styles_hook ()
+function mytimbertheme_styles_hook()
 {
 	$get_bootstrap_css_dir = get_template_directory_uri() . '/vendor/twbs/bootstrap/dist/css/';
 	wp_enqueue_style('bootstrap', $get_bootstrap_css_dir . '/bootstrap.min.css');

@@ -1,16 +1,20 @@
 {% if menu %}
-  	<nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
-    <div class="container">	  	<div id="{{theme.slug}}-navbar-collapse-1" class="collapse navbar-collapse">
-		{% for item in items %}
-			<ul class="{{ item.classes|join('nav', 'navbar-nav') }}">
-				<a target="{{ item.target }}" href="{{ item.link }}">
-				{{ item.title }}
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark" role="navigation">
+		<div
+			class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#{{ theme.slug }}-navbar-collapse-1" aria-controls="{{ theme.slug }}-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation {{ theme.slug }}">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<h1 class="hdr-logo navbar-brand" role="banner">
+				<a class="text-light hdr-logo-link" href="{{site.url}}" rel="home">
+					{{site.name}}
 				</a>
-				{% include 'menu.twig' with {
-				items: item.children
+			</h1>
+			{% include 'partial/menu-tree.twig' with {
+				items: items
 				} %}
-			</ul>
-		{% endfor %}
 		</div>
-  	</nav>
+	</nav>
 {% endif %}

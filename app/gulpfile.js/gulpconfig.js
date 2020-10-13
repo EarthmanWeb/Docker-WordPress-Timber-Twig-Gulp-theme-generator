@@ -1,12 +1,12 @@
 // ==== CONFIGURATION ==== //
 
 // Project settings - change these in your new project
-const themeFolder = 'sos-constructex'; // The directory name for your theme - no spaces, characters (other than _ or -) or capitals;
-const themeName = 'SOS Constructex Custom Theme';
-const themeUri = 'https://sosmediacorp.com';
-const themeAuthor = 'SOS Job Applicant';
-const themeDescription = 'This is the custom theme you requested, rolled out by a custom Docker / Gulp build automations that I created, too!!!';
-const themeVersion = '1.0.1';
+const themeFolder = 'my-timber-theme'; // The directory name for your theme - no spaces, characters (other than _ or -) or capitals;
+const themeName = 'Timber Twig Custom Theme';
+const themeUri = 'https://earthman.ca';
+const themeAuthor = 'Earthman Media';
+const themeDescription = 'Custom theme built on Timber, Twig and Bootstrap4';
+const themeVersion = '1.1.0';
 
 // Do not alter these
 const src = './src/'; // The raw material of your theme: custom scripts, SCSS source files, PHP files, images, etc.; do not delete this folder!
@@ -26,7 +26,7 @@ module.exports = {
     watchOptions: {
       debounceDelay: 2000, // This introduces a small delay when watching for file change events to avoid triggering too many reloads
     },
-    reloadOnRestart: true
+    reloadOnRestart: true,
   },
 
   images: {
@@ -69,11 +69,11 @@ module.exports = {
 
   styles: {
     vars: {
-      'themeName': themeName,
-      'themeUri': themeUri,
-      'themeAuthor': themeAuthor,
-      'themeDescription': themeDescription,
-      'themeVersion': themeVersion
+      themeName: themeName,
+      themeUri: themeUri,
+      themeAuthor: themeAuthor,
+      themeDescription: themeDescription,
+      themeVersion: themeVersion,
     },
     build: {
       src: src + 'scss/**/*.scss',
@@ -92,10 +92,10 @@ module.exports = {
           'Android >= 4',
           'Opera >= 12',
         ],
-        cascade: false
+        cascade: false,
       },
       cssnext: {
-        warnForDuplicates: false
+        warnForDuplicates: false,
       },
       shortcss: {},
     },
@@ -104,7 +104,7 @@ module.exports = {
     libsass: {
       includePaths: ['./src/scss', modules], // Adds Bower and npm directories to the load path so you can @import directly
       precision: 6,
-      onError: function(err) {
+      onError: function (err) {
         return console.log(err);
       },
     },

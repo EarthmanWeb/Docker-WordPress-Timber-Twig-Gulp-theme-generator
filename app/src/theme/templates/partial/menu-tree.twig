@@ -1,0 +1,12 @@
+<div id="{{ theme.slug }}-navbar-collapse-1" class="collapse navbar-collapse">
+	{% for item in items %}
+		<ul class="{{ item.classes|join('nav', 'navbar-nav') }}">
+			<a class="text-light " target="{{ item.target }}" href="{{ item.link }}">
+				{{ item.title }}
+			</a>
+			{% include 'partial/menu-tree.twig' with {
+				items: item.children
+				} %}
+		</ul>
+	{% endfor %}
+</div>

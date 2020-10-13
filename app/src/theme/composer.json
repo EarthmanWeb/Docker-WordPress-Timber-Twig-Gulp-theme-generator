@@ -1,10 +1,9 @@
 {
   "name": "upstatement/timber-starter-theme",
   "description": "Starter theme to build a Timber theme",
-  "type":"wordpress-theme",
-  "minimum-stability" : "stable",
-  "authors": [
-    {
+  "type": "wordpress-theme",
+  "minimum-stability": "stable",
+  "authors": [{
       "email": "jared@upstatement.com",
       "name": "jarednova"
     },
@@ -13,12 +12,10 @@
       "name": "earthmanWeb"
     }
   ],
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://wpackagist.org"
-    }
-  ],
+  "repositories": [{
+    "type": "composer",
+    "url": "https://wpackagist.org"
+  }],
   "require": {
     "timber/timber": "^1",
     "twbs/bootstrap": "^4.5",

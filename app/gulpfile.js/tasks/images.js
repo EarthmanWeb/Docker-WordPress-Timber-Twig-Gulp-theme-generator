@@ -1,12 +1,12 @@
 // ==== IMAGES ==== //
-"use strict";
+'use strict';
 
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins')({ camelize: true });
 const config = require('../gulpconfig.js');
 
 // Copy changed images from the source folder to `build` (fast)
-function images(){
+function images() {
   return gulp
     .src(config.images.build.src)
     .pipe(plugins.changed(config.images.build.dest))
@@ -19,9 +19,10 @@ function pipeImages() {
     .src(config.images.dist.src)
     .pipe(plugins.imagemin(config.images.dist.imagemin))
     .pipe(gulp.dest(config.images.dist.dest));
-};
-function imagesOptimize(done){ return gulp.series('utilsDist', pipeImages )(done)}
-
+}
+function imagesOptimize(done) {
+  return gulp.series('utilsDist', pipeImages)(done);
+}
 
 // export tasks
 exports.imagesOptimize = imagesOptimize;

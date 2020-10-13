@@ -7,6 +7,8 @@ At the time of creation this works (on MacOS Mojave) with the following installe
 
 [Docker](https://docs.docker.com/docker-for-mac/install/): version 19.03.13
 
+[Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos): version 1.10.13 - Installed globally
+
 [Node (installed using Homebrew)](https://nodejs.org/en/download/package-manager/#macos): version 14.13.0
 
 [Yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable): version 1.22.5

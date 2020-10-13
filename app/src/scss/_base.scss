@@ -1,8 +1,18 @@
 // global styles here, such as basic typography, sizing, display styles, etc
 body {
-    background-color: rgb(255, 255, 255) !important;
+	background-color: rgb(255, 255, 255) !important;
 }
+
 #site-header {
-    background: rgb(0, 42, 255);
-    position: relative;
+	background: rgb(0, 42, 255);
+	position: relative;
+}
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
 }

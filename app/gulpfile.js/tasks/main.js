@@ -1,34 +1,40 @@
 // ==== MAIN ==== //
-"use strict";
+'use strict';
 
 const gulp = require('gulp');
 const composer = require('gulp-composer');
 
 // Install Composer deps
-function themeComposerInstall(done){
-  return gulp.series(function(){
+function themeComposerInstall(done) {
+  return gulp.series(function () {
     return composer({
-      "working-dir": "./src/theme",
-      bin: "composer"
-    })
-  })(done)
+      'working-dir': './src/theme',
+      bin: 'composer',
+    });
+  })(done);
 }
 
 // One-off setup tasks
-function setup(done) { gulp.series('utilsNormalize')(done) }
+function setup(done) {
+  gulp.series('utilsNormalize')(done);
+}
 
 // Build a working copy of the theme
-function build(done){
-  return gulp.series(themeComposerInstall, gulp.parallel('images', 'scripts', 'styles', 'theme'))(done);
+function build(done) {
+  return gulp.series(
+    themeComposerInstall,
+    gulp.parallel('images', 'scripts', 'styles', 'theme')
+  )(done);
 }
 
 // Dist task chain: wipe -> build -> clean -> copy -> compress images
 // NOTE: this is a resource-intensive task!
-function dist(done){ gulp.series(themeComposerInstall, 'imagesOptimize')(done)}
+function dist(done) {
+  gulp.series(themeComposerInstall, 'imagesOptimize')(done);
+}
 
 // export tasks
 exports.setup = setup;
 exports.build = build;
 exports.dist = dist;
 exports.themeFonts = themeComposerInstall;
-

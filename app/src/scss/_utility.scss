@@ -1,0 +1,36 @@
+$util-font-sizes: 10,
+11,
+12,
+14,
+15,
+16,
+17,
+18,
+19,
+20,
+25,
+30,
+35,
+40,
+50,
+60,
+70,
+80,
+90,
+100,
+110,
+120,
+130,
+140,
+150,
+160,
+170,
+180,
+190,
+200;
+
+@each $util-font-size in $util-font-sizes {
+    .font-size-#{$util-font-size} {
+        font-size: #{$util-font-size}px !important;
+    }
+}
